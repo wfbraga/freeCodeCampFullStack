@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/specificity.css">
+    <title>Specificity</title>
+    <style>
+        p {
+            color: rgb(92, 92, 92);
+            font-size: 20px;
+        }
+        #especial-paragrafo {
+            color: rgb(129, 209, 129);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(243, 243, 243);">
+  <p style="color: rgb(185, 136, 136);">Ainda que tenha um css para p no aquivo fora e tambem outro internamente, o que tem precedencia é o escrito dentro da tag no atributo 'style'.</p>
+  <p>Esse paragrafo pegará a cor do css interno ao html.</p>
+  <p>A regra definida externa para p ficara sem efeito pois sempre a do arquivo interno terá precedencia</p>
+  <p id="especial-paragrafo">Esse paragrafo tem um id, portanto a regra definida para o id terá precedencia sobre a regra definida para a tag p.</p>
+  <p>Agora vamos falar de id, classes e seletores de atributo.  </p>
+    <span class="blue-span">Esse texto é azul porque a classe aplicada ao elemento tem precedencia ao seletor do elemento.</span><br>
+    <span id="green-span" class="blue-span">Esse texto é verde. Mesmo tendo a classe azul, o id tem precedência.</span><br>
+    <span >Esse texto é azul e vermelho.</span>
+  <p>Agora falearemos de classes</p>
+  <p class="blue-p">Classes precedem seletores de elemento mesmo que o seletor de elemento esteja interno e a classe no arquivo externo.</p>
+
+  <div style="color: blueviolet;">
+    <h5>Esse h5 é roxo porque o estilo aplicado ao elemento tem precedência ao seletor do elemento.</h5>
+    <p>Como eu não tenho um aregra específica para h5 ele acaba por herdar do estilo da div. </p>
+    <p style="color: inherit"> Aqui estamos usando uma herança forçada.</p>
+  </div>
+
+  <hr>
+
+  <section>
+    <h3>Seletor de atributo</h3>
+    <p>Um seletor que mira atributos (por exemplo <code>a[data-role="btn"]</code>) tem a mesma 'força' que uma classe. Abaixo um link com o atributo data-role que recebe um estilo de botão.</p>
+    <a href="#" data-role="btn">Link com data-role="btn"</a>
+  </section>
+
+  <section>
+    <h3>Descendente vs Filho direto</h3>
+    <p>O seletor descendente <code>.container p</code> estiliza qualquer <code>p</code> dentro de <code>.container</code>. O seletor filho direto <code>.container &gt; p</code> afeta apenas os filhos no nível imediato.</p>
+    <div class="container">
+      <p>Parágrafo descendente (afetado por <code>.container p</code>).</p>
+      <div>
+        <p>Parágrafo em nível mais profundo — também afetado por <code>.container p</code>, mas não por <code>.container &gt; p</code>.</p>
+      </div>
+    </div>
+    <div class="container">
+      <p>Parágrafo filho direto (afetado por <code>.container &gt; p</code>).</p>
+    </div>
+  </section>
+
+  <section>
+    <h3>Seletores de irmãos</h3>
+    <p>O seletor adjacente <code>h4 + p</code> estiliza apenas o parágrafo imediatamente depois do <code>h4</code>. O seletor geral <code>h4 ~ p</code> estiliza todos os irmãos subsequentes.</p>
+    <h4>Exemplo de título h4</h4>
+    <p>Parágrafo adjacente (somente este é afetado por <code>h4 + p</code>).</p>
+    <p>Parágrafo subsequente (afeto por <code>h4 ~ p</code>).</p>
+  </section>
+
+  <section>
+    <h3>Pseudo-classes</h3>
+    <p>Pseudo-classes como <code>:hover</code> são tratadas como classes em termos de especificidade. Veja o botão e passe o mouse para ver a mudança de estilo.</p>
+    <button class="action">Passe o mouse</button>
+  </section>
+
+  <section>
+    <h3>!important vs Inline styles</h3>
+    <p>Se uma regra possui <code>!important</code>, ela vencerá outra regra sem <code>!important</code>, mesmo que esta outra seja inline. Contudo, se tanto a regra inline quanto a externa tiverem <code>!important</code>, a especificidade decide o vencedor.</p>
+    <p class="important-demo" style="color: green;">Este parágrafo tem <code>style="color: green;"</code> mas a classe com <code>!important</code> definida no CSS fará com que a cor exibida seja magenta.</p>
+    <p style="color: brown !important;">Aqui o inline usa <code>!important</code> também — neste caso o inline vence pois é mais específico quando ambos usam <code>!important</code>.</p>
+  </section>
+</body>
+</html>
